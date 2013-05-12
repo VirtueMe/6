@@ -75,6 +75,16 @@ class Traad extends Thread {
 	sta = 0;
 	slu = minsteLengde;
 
+	opprett();
+
+    }
+
+    Traad(String[] delt) {
+	this.delt = delt;
+    }
+
+    public void opprett() {
+
 	for (int i = 0; i<antallTrader; i++) {
 
 	    if (modul!=0) {
@@ -90,11 +100,6 @@ class Traad extends Thread {
 	    System.out.println("Waiter?");
 	}
 
-
-    }
-
-    Traad(String[] delt) {
-	this.delt = delt;
     }
 
     public void sorter() {
