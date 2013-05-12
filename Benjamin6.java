@@ -7,14 +7,14 @@ import java.util.Scanner;
 //threadpeker
 
 class Benjamin6 {
-    public static void main (String[] args) {
+	public static void main (String[] args) {
 
-	String en = "";
-	String to = "";
-	String tre = "";
+		String en = "";
+		String to = "";
+		String tre = "";
 
-	int tradTeller = 0;
-	int antallTrader = 1;
+		int tradTeller = 0;
+		int antallTrader = 1;
 
 	/*
 		String test = "polse";
@@ -26,32 +26,32 @@ class Benjamin6 {
 		System.out.println(test.compareTo(test3) < 0);
 	*/
 
-	int lengde = args.length;
+		int lengde = args.length;
 
-	if (lengde!=3) {
-	    System.out.println("For mye. For lite.");
-	} else {
-	    en =  args[0];
-	    to = args[1];
-	    tre = args[2];
+		if (lengde!=3) {
+			System.out.println("For mye. For lite.");
+		} else {
+			en =  args[0];
+			to = args[1];
+			tre = args[2];
+		}
+
+		Innleser lesning = new Innleser(antallTrader);
+
 	}
-
-	Innleser lesning = new Innleser(antallTrader);
-
-    }
 
 }
 
 class Traad extends Thread {
 
-    int antallFerdige = 0;
+	int antallFerdige = 0;
 
-    int minsteLengde;
+	int minsteLengde;
 
-    String[] liste;
-    String[] delt;
+	String[] liste;
+	String[] delt;
 
-    Traad[] total;
+	Traad[] total;
 
     //    Traad mor;
 
@@ -66,69 +66,69 @@ class Traad extends Thread {
 	//	sta = 0;
 	//	slu = ord.length;
 
-	liste = ord;
-	minsteLengde= y;
-	total = new Traad[antallTrader];
-	this.antallTrader = antallTrader;
-	this.modul = 0;
-	
-	sta = 0;
-	slu = minsteLengde;
+    	liste = ord;
+    	minsteLengde= y;
+    	total = new Traad[antallTrader];
+    	this.antallTrader = antallTrader;
+    	this.modul = 0;
 
-	opprett();
+    	sta = 0;
+    	slu = minsteLengde;
+
+    	opprett();
 
     }
 
     Traad(String[] delt) {
-	this.delt = delt;
+    	this.delt = delt;
     }
 
     public void opprett() {
 
-	for (int i = 0; i<antallTrader; i++) {
+    	for (int i = 0; i<antallTrader; i++) {
 
-	    if (modul!=0) {
-		slu++;
-		modul--;
-	    }
-	    delt = Arrays.copyOfRange(liste, sta, slu);
-	    sta = slu+1;
-	    slu = sta+minsteLengde;
+    		if (modul!=0) {
+    			slu++;
+    			modul--;
+    		}
+    		delt = Arrays.copyOfRange(liste, sta, slu);
+    		sta = slu+1;
+    		slu = sta+minsteLengde;
 
-	    total[i] = new Traad(delt);
-	    total[i].start();
-	    System.out.println("Waiter?");
-	}
+    		total[i] = new Traad(delt);
+    		total[i].start();
+    		System.out.println("Waiter?");
+    	}
 
     }
 
     public void sorter() {
 
-	String lager;
-	String tmp;
+    	String lager;
+    	String tmp;
 
 	//	tmp = delt[5162];
 	//System.out.println(tmp);
 
 
 
-	for (int i = 0; i<delt.length; i++) {
+    	for (int i = 0; i<delt.length; i++) {
 
 	    //  System.out.println(delt[i]);
 
 	    //   Arrays.sort(delt);
 
-	    if(i+1!=delt.length) {
+    		if(i+1!=delt.length) {
 
-		int k = 0;
-		if(delt[i].compareTo(delt[i+1]) > 0) {
+    			int k = 0;
+    			if(delt[i].compareTo(delt[i+1]) > 0) {
 
-		    lager = delt[i];
-		    delt[i] = delt[i+1];
+    				lager = delt[i];
+    				delt[i] = delt[i+1];
 
-		    while (delt[k].compareTo(delt[k+1]) > 0) {
+    				while (delt[k].compareTo(delt[k+1]) > 0) {
 
-		    }
+    				}
 		    // delt[i] = null;
 
 		    /*
@@ -139,68 +139,68 @@ class Traad extends Thread {
 		    */
 		}
 
-	    }
-
-
 	}
 
-		for (int i = 0; i<delt.length; i++) {
-		    System.out.println(delt[i]);
-		}
 
-    }
+}
 
-    public void run() {
+for (int i = 0; i<delt.length; i++) {
+	//System.out.println(delt[i]);
+}
+
+}
+
+public void run() {
 
 	if(delt!=null) {
-	System.out.println(delt.length);
-	sorter();
+		System.out.println(delt.length);
+		sorter();
 	}
 
-    }
+}
 
 }
 
 class Innleser {
 
-    int antallTrader = 0;
+	int antallTrader = 0;
 
-    Innleser(int antallTrader) {
+	Innleser(int antallTrader) {
 
-	File fil1 = new File("names.txt");
-	String[] liste;
+		File fil1 = new File("names.txt");
+		String[] liste;
 
-	this.antallTrader = antallTrader;
+		this.antallTrader = antallTrader;
 
-	try {
-	    Scanner f = new Scanner(fil1);
+		try {
+			Scanner f = new Scanner(fil1);
 
-	    int antall = f.nextInt();
+			int antall = f.nextInt();
 
-	    int y = antall / antallTrader;
-	    int modul = antall % antallTrader;
-	    System.out.println(modul);
+			int y = antall / antallTrader;
+			int modul = antall % antallTrader;
+			System.out.println(modul);
 
-	    liste = new String[antall];
-	    f.nextLine();
+			liste = new String[antall];
+			f.nextLine();
 
-	    for (int i = 0; i<antall; i++) {
+			for (int i = 0; i<antall; i++) {
 
-		String linje = f.nextLine();
-		liste[i] = linje;
+				String linje = f.nextLine();
+				liste[i] = linje;
 
-	    }
+			}
 
-	    Traad traad = new Traad(liste, y, antallTrader, modul);
-	    traad.start();
+			Traad traad = new Traad(liste, y, antallTrader, modul);
+			traad.start();
 
-	} catch (FileNotFoundException e) {
-	    System.out.println("Fil 1 ikke funnet.");
-	    e.printStackTrace();
-	}
+		} catch (FileNotFoundException e) {
+			System.out.println("Fil 1 ikke funnet.");
+			e.printStackTrace();
+		}
 
 	//Lesinn
 
-    }
+	}
 
 }
