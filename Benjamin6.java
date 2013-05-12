@@ -153,7 +153,8 @@ for (int i = 0; i<delt.length; i++) {
 public void run() {
 
 	if(delt!=null) {
-		System.out.println(delt.length);
+		//System.out.println(delt.length);
+		
 		sorter();
 	}
 
