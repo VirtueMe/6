@@ -1,0 +1,198 @@
+
+import java.io.*;
+import java.util.*;
+import java.util.Scanner;
+
+//sortThread extend thread
+//threadpeker
+
+class Benjamin6 {
+    public static void main (String[] args) {
+
+	String en = "";
+	String to = "";
+	String tre = "";
+
+	int tradTeller = 0;
+	int antallTrader = 128;
+
+
+	//	String test = "polse";
+	//	String test1 = "polse";
+	//	String test2 = "pylse";
+	//	String test3 = "qylse";
+
+	//	System.out.println(test.compareTo(test1));
+	//	System.out.println(test.compareTo(test3));
+
+	int lengde = args.length;
+
+	if (lengde!=3) {
+	    System.out.println("For mye. For lite.");
+	} else {
+	    en =  args[0];
+	    to = args[1];
+	    tre = args[2];
+	}
+
+	Innleser lesning = new Innleser(antallTrader);
+
+    }
+
+}
+
+class Traad extends Thread {
+
+    int antallFerdige = 0;
+
+    int minsteLengde;
+
+    String[] liste;
+
+    Traad[] total;
+
+    //    Traad mor;
+
+    int sta = 0;//Start
+    int slu = 0;//Slutt
+
+    Traad(String[] ord, int y, int antallTrader) {//Rotkonstruktor
+
+	liste = ord;
+	//	sta = 0;
+	//	slu = ord.length;
+	minsteLengde= y;
+	total = new Traad[antallTrader];
+
+    }
+
+    Traad(int start, int slutt, String[] ord, Traad mor) {//Vanling node
+
+	sta = start;
+	slu = slutt;
+	liste = ord;
+	this.mor = mor;
+
+    }
+
+    public void sorter(int start, int slutt, String[] ord) {
+
+	for (int i = start; i<slutt; i++) {
+	    //   System.out.println("Lolle");
+
+	    if(ord[i].compareTo(ord[i-1]) > 0) {
+		//finnplass
+	    }
+
+	    if (ord[i].compareTo(ord[i+1]) < 0) {
+		//finnplass
+	    }
+
+	}
+
+    }
+
+    public void sortSjekk(int start, int slutt, String[] ord) {
+
+		for (int i = start; i<slutt; i++) {
+
+		    if (ord[i].compareTo(ord[i-1]) <= 0 && ord[i].compareTo(ord[i+1]) >= 0) {
+
+		    }
+
+		}
+
+    }
+
+    public void run() {
+
+	//System.out.println(sta);	
+	//System.out.println(slu);
+	//System.out.println(minsteLengde);
+
+	if(slu - sta > minsteLengde) {
+	    //	    System.out.println("Start: " + sta);
+	    //	    System.out.println("Slutt: " + slu);
+	    //	    System.out.println(slu - sta);
+
+	    int indeks = delOpp(liste, sta, slu);
+	    System.out.println(indeks);
+
+	    new Traad(sta, indeks, liste, this).start();
+	    new Traad(indeks+1, slu, liste, this).start();
+	    //Start to nye
+	    //wait
+
+	} else {
+
+	    //Sorterpaavanlig maate
+
+	}
+
+	if (mor != null) {
+
+	    //mor.ferdige(min)
+
+	} else {
+
+	    System.out.println("Ferdig sortert");
+
+	}
+
+    }
+
+    int delOpp(String[] ord, int st, int sl) {
+	return ((st+sl) / 2);
+
+    }
+    //   System.out.println("TRAAAD");
+
+}
+
+class Innleser {
+
+    int antallTrader = 0;
+
+    Innleser(int antallTrader) {
+
+	File fil1 = new File("names.txt");
+	String[] liste;
+
+	this.antallTrader = antallTrader;
+
+	try {
+	    Scanner f = new Scanner(fil1);
+
+	    int antall = f.nextInt();
+
+	    int y = antall / antallTrader;
+
+	    liste = new String[antall];
+	    f.nextLine();
+
+	    for (int i = 0; i<antall; i++) {
+
+		String linje = f.nextLine();
+		liste[i] = linje;
+
+		//	System.out.println(liste[i]);
+		//	System.out.println(linje);
+		//	if (i==0) {
+		//	    System.out.println(linje);
+		//	}
+
+	    }
+
+	    Traad traad = new Traad(liste, y, antallTrader);
+	    traad.start();
+
+	} catch (FileNotFoundException e) {
+	    System.out.println("Fil 1 ikke funnet.");
+	    e.printStackTrace();
+	}
+
+	//Lesinn
+
+    }
+
+}
